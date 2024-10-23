@@ -20,9 +20,9 @@ export const handler = async (event, context) => {
   const proxyMiddleware = createProxyMiddleware({
     target: targetUrl,
     changeOrigin: true,
-    pathRewrite: {
-      "^/api/2024-10/graphql.json": "/api/2024-10/graphql.json",
-    },
+    // pathRewrite: {
+    //   "^/api/2024-10/graphql.json": "/api/2024-10/graphql.json",
+    // },
     onProxyReq: (proxyReq) => {
       proxyReq.setHeader("Content-Type", "application/json");
       proxyReq.setHeader(
