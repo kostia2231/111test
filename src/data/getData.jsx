@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import process from "process";
+// import process from "process";
 
-const storefrontAccessToken = process.env.STOREFRONT_ACCESS_TOKEN;
+const storefrontAccessToken = import.meta.env.STOREFRONT_ACCESS_TOKEN;
 
 export const useProducts = () => {
   return useQuery({
