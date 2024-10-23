@@ -1,7 +1,7 @@
 import { gql, GraphQLClient } from "graphql-request";
 import process from "process";
 
-const storefrontAccessToken = process.env.VITE_SHOPIFY_STOREFRONT_ACCESS_TOKEN;
+const storefrontAccessToken = process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN;
 // const endpoint = import.meta.env.VITE_SHOPIFY_STORE_DOMAIN;
 
 const graphQLClient = new GraphQLClient(

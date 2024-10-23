@@ -27,7 +27,7 @@ export const handler = async (event, context) => {
       proxyReq.setHeader("Content-Type", "application/json");
       proxyReq.setHeader(
         "X-Shopify-Storefront-Access-Token",
-        process.env.VITE_SHOPIFY_STOREFRONT_ACCESS_TOKEN
+        process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN
       );
     },
     onProxyRes: (_proxyRes, _req, res) => {
