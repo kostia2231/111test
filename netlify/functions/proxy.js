@@ -4,6 +4,19 @@ import process from "process";
 export const handler = async (event, context) => {
   const targetUrl = "https://4hmm5a-ih.myshopify.com/api/2024-10/graphql.json";
 
+  const req = {
+    method: event.httpMethod,
+    url: event.path,
+    headers: event.headers,
+    body: event.body,
+  };
+
+  const res = {
+    setHeader: (name, value) => context.succeed({ headers: { [name]: value } }),
+    writeHead: (statusCode) => context.succeed({ statusCode }),
+    end: (data) => context.succeed({ body: data }),
+  };
+
   const proxyMiddleware = createProxyMiddleware({
     target: targetUrl,
     changeOrigin: true,
@@ -23,7 +36,7 @@ export const handler = async (event, context) => {
   });
 
   return new Promise((resolve, reject) => {
-    proxyMiddleware(event, context, (err) => {
+    proxyMiddleware(req, res, (err) => {
       if (err) {
         reject({
           statusCode: 500,
