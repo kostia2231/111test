@@ -6,7 +6,7 @@ const storefrontAccessToken = process.env.STOREFRONT_ACCESS_TOKEN;
 
 const graphQLClient = new GraphQLClient(
   // "http://localhost:8888/api/api/2024-10/graphql.json",
-  "https://idyllic-concha-a54637.netlify.app/api/2024-10/graphql.json",
+  "https://localhost:8888/api/api/2024-10/graphql.json",
   {
     headers: {
       "X-Shopify-Storefront-Access-Token": storefrontAccessToken,
