@@ -1,4 +1,5 @@
 import { createProxyMiddleware } from "http-proxy-middleware";
+import process from "process";
 
 export const handler = async (event, context) => {
   const targetUrl = "https://4hmm5a-ih.myshopify.com/api/2024-10/graphql.json";
@@ -7,24 +8,21 @@ export const handler = async (event, context) => {
     target: targetUrl,
     changeOrigin: true,
     pathRewrite: {
-      "^/api": "", // Убираем /api из запроса
+      "^/api/2024-10/graphql.json": "/api/2024-10/graphql.json",
     },
     onProxyReq: (proxyReq) => {
-      // Установка заголовков, если необходимо
       proxyReq.setHeader("Content-Type", "application/json");
       proxyReq.setHeader(
         "X-Shopify-Storefront-Access-Token",
-        import.meta.env.VITE_SHOPIFY_STOREFRONT_ACCESS_TOKEN
+        process.env.VITE_SHOPIFY_STOREFRONT_ACCESS_TOKEN
       );
     },
     onProxyRes: (_proxyRes, _req, res) => {
-      // Можно изменить ответ от API перед тем, как отправить его клиенту
-      res.setHeader("Access-Control-Allow-Origin", "*"); // Настройки CORS
+      res.setHeader("Access-Control-Allow-Origin", "*");
     },
   });
 
   return new Promise((resolve, reject) => {
-    // Используем функцию для обработки запроса
     proxyMiddleware(event, context, (err) => {
       if (err) {
         reject({
